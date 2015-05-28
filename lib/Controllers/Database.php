@@ -40,7 +40,6 @@ class Controllers_DataBase
 
     public function getAllRecords(){
         $res = $this->_db->query('SELECT * FROM adresse ORDER BY id ASC');
-
         return $res->fetch_all();
     }
 }
