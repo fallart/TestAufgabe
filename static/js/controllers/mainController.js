@@ -6,11 +6,27 @@ function mainController ($scope, $http) {
         'Wohnort',
         'Aktion'
     ];
-    $http({method:'GET', url:'database.php', params: {'action': 'get_all_records'}}).
-        success(function(data) {
-            console.log(data);
-            $scope.records = data;
-        });
+
+    $scope.init = function(){
+        $http({method:'GET', url:'database.php', params: {'action': 'get_records'}}).
+            success(function(data) {
+                $scope.records = data;
+            });
+    };
+
+    $scope.changeAktiv = function(id){
+        $http({method:'GET', url:'database.php', params: {'action': 'change_aktiv', 'id':id}}).
+            success(function(data) {
+                $scope.init();
+            });
+    };
+
+    $scope.filter = function(vorname, nachname, postleitzahl, wohnort){
+        $http({method:'GET', url:'database.php', params: {'action': 'get_records', 'vorname':vorname, 'nachname':nachname, 'postleitzahl':postleitzahl, 'wohnort':wohnort}}).
+            success(function(data) {
+                $scope.records = data;
+            });
+    };
 }
 
 angular

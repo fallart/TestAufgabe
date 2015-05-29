@@ -38,8 +38,38 @@ class Controllers_DataBase
         }
     }
 
-    public function getAllRecords(){
-        $res = $this->_db->query('SELECT * FROM adresse ORDER BY id ASC');
+    public function getRecords($filters = array()){
+        $query = 'SELECT * FROM `adresse`';
+
+        if($filters && is_array($filters)){
+            $i = 0;
+            foreach($filters as $key => $value){
+                if($i === 0){
+                    $query .= ' WHERE ';
+                }
+                else{
+                    $query .= ' AND ';
+                }
+
+                $query .= '`' . $key . '`' . ' LIKE \'' . $value . '\'';
+                $i++;
+            }
+        }
+        Controllers_Log::message($query);
+        $res = $this->_db->query($query . ' ORDER BY id ASC');
         return $res->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function changeAktiv($id){
+        try{
+            $stmt = $this->_db->stmt_init();
+            $stmt->prepare('UPDATE `adresse` SET `enabled` = !`enabled` WHERE `id`= ?');
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $stmt->close();
+        }
+        catch(Exception $ex){
+            Controllers_Log::message('affected_rows: '.$ex->getMessage());
+        }
     }
 }

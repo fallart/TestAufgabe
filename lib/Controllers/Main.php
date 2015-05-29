@@ -18,12 +18,14 @@ class Controllers_Main {
 
     }
 
-    public function getAllRecords(){
-        echo json_encode(Controllers_DataBase::getInstance()->getAllRecords());
+    public function getRecords($filters = array()){
+        echo json_encode(Controllers_DataBase::getInstance()->getRecords($filters));
     }
 
-    public function getRecords(){
-
+    public function changeAktiv($id){
+        $id = intval($id);
+        Controllers_Log::message($id);
+        echo Controllers_DataBase::getInstance()->changeAktiv($id);
     }
 
 }
