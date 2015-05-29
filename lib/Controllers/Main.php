@@ -19,7 +19,17 @@ class Controllers_Main {
     }
 
     public function getRecords($filters = array()){
-        echo json_encode(Controllers_DataBase::getInstance()->getRecords($filters));
+        $valid = true;
+        foreach($filters as $key => $val){
+            if(!preg_match('/^[\w0-9\%]+$/i',$val)){
+                $valid = false;
+                Controllers_Log::message('Invalid value:' . $val);
+                break;
+            }
+        }
+        if($valid){
+            echo json_encode(Controllers_DataBase::getInstance()->getRecords($filters));
+        }
     }
 
     public function changeAktiv($id){

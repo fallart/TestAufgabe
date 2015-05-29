@@ -8,7 +8,7 @@
         <script src="static/js/lib/bootstrap.min.js"></script>
     </head>
     <body ng-controller="mainController" ng-init="init()">
-        <form role="form">
+        <form role="form" name="form">
             <div class="form-group col-lg-3">
                 <label for="sucheNachVorname">Suche nach Vorname</label>
                 <input type="text" class="form-control" id="sucheNachVorname" placeholder="Enter Vorname" ng-model="vorname">
@@ -29,7 +29,7 @@
                 <button class="btn btn-default" ng-click="filter(vorname, nachname, postleitzahl, wohnort)">
                     <span class="glyphicon glyphicon-search" aria-hidden="true" >Filter</span>
                 </button>
-                <button type="reset" class="btn btn-default">
+                <button type="reset" class="btn btn-default" ng-click="reset(form)">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true" >Reset</span>
                 </button>
             </div>

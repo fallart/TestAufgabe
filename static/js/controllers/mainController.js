@@ -27,6 +27,18 @@ function mainController ($scope, $http) {
                 $scope.records = data;
             });
     };
+
+    $scope.reset = function (form) {
+        if(form){
+            form.$setPristine();
+            form.$setUntouched();
+        }
+        $scope.vorname = '';
+        $scope.nachname = '';
+        $scope.postleitzahl = '';
+        $scope.wohnort = '';
+        $scope.init();
+    }
 }
 
 angular
