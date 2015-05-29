@@ -13,7 +13,7 @@ class Controllers_DataBase
     protected static $_instance = null;
 
     /**
-     * @return Controllers_DataBase|null
+     * @return Controllers_DataBase
      */
     public static function getInstance()
     {

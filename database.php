@@ -8,7 +8,6 @@
 
 include_once('./lib/bootstrap.php');
 
-
 if(isset($_GET['action']) && $_GET['action']){
     $action = $_GET['action'];
 
@@ -38,8 +37,6 @@ if(isset($_GET['action']) && $_GET['action']){
                 isset($_GET['id'])){
                 Controllers_Main::getInstance()->changeAktiv($_GET['id']);
             }
-            break;
-        default:
             break;
     }
 }

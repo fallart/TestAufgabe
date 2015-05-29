@@ -24,8 +24,9 @@ class Controllers_Main {
 
     public function changeAktiv($id){
         $id = intval($id);
-        Controllers_Log::message($id);
-        echo Controllers_DataBase::getInstance()->changeAktiv($id);
+        if($id || $id === 0){
+            echo Controllers_DataBase::getInstance()->changeAktiv($id);
+        }
     }
 
 }
