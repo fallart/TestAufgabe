@@ -7,12 +7,42 @@
         <script src="static/js/lib/jquery-1.11.3.min.js"></script>
         <script src="static/js/lib/bootstrap.min.js"></script>
     </head>
-    <body>
-        <div ng-controller="mainController as main">
-            <p>Название: {{main.phone.name}}</p>
-            <p>Цена: {{main.phone.price}} $</p>
-            <p>Производитель: {{main.phone.company.name}}</p>
-        </div>
+    <body ng-controller="mainController">
+        <form role="form">
+            <div class="form-group col-lg-3">
+                <label for="sucheNachVorname">Suche nach Vorname</label>
+                <input type="text" class="form-control" id="sucheNachVorname" placeholder="Enter Vorname">
+            </div>
+            <div class="form-group col-lg-3">
+                <label for="sucheNachNachname">Suche nach Nachname</label>
+                <input type="email" class="form-control" id="sucheNachNachname" placeholder="Enter Nachname">
+            </div>
+            <div class="form-group col-lg-3">
+                <label for="sucheNachNachname">Suche nach Postleitzahl</label>
+                <input type="email" class="form-control" id="sucheNachPostleitzahl" placeholder="Enter Postleitzahl">
+            </div>
+            <div class="form-group col-lg-3">
+                <label for="sucheNachNachname">Suche nach Wohnort</label>
+                <input type="email" class="form-control" id="sucheNachWohnort" placeholder="Enter Wohnort">
+            </div>
+        </form>
+        <table class="table">
+            <tr>
+                <th ng-repeat="title in titles">{{title}}</th>
+            </tr>
+            <tr ng-repeat="record in records" ng-class="record.enabled == 1 ? 'success' : 'warning'">
+                <td>{{record.firstname}}</td>
+                <td>{{record.lastname}}</td>
+                <td>{{record.zip_code}}</td>
+                <td>{{record.city}}</td>
+                <td>
+                    <button class="btn btn-default">
+                        <span class="glyphicon" aria-hidden="true" ng-class="record.enabled != 1 ? 'glyphicon-ok' : 'glyphicon-remove'"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <span ng-if="records.length == 0"><strong>No results found...</strong></span>
         <script src="static/js/lib/angular.min.js"></script>
         <script type="text/javascript">
             angular.module('adressBuchApp', []);

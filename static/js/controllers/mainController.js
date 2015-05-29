@@ -1,14 +1,18 @@
-var myApp=angular.module('adressBuchApp');
-myApp.controller('mainController', function($scope) {
+function mainController ($scope, $http) {
+    $scope.titles = [
+        'Vorname',
+        'Nachname',
+        'Postleitzahl',
+        'Wohnort',
+        'Aktion'
+    ];
+    $http({method:'GET', url:'database.php', params: {'action': 'get_all_records'}}).
+        success(function(data) {
+            console.log(data);
+            $scope.records = data;
+        });
+}
 
-    this.phone = {
-
-        name: 'Nokia Lumia 630',
-        year: 2014,
-        price: 200,
-        company: {
-            name: 'Nokia',
-            country: 'Финляндия'
-        }
-    }
-});
+angular
+    .module('adressBuchApp', [])
+    .controller('mainController', mainController);
