@@ -7,7 +7,7 @@
  */
 
 function autoLoad_function($className) {
-    $filePath = str_replace('_', DS, $className );
+    $filePath = str_replace('_', DIRECTORY_SEPARATOR, $className );
     $fileName = 'lib/' . $filePath . ".php";
     return include_once($fileName);
 }
