@@ -1,1 +1,1 @@
-#in directory /config/database.php liegt Configuration für Database-Controller.
+in directory /config/database.php liegt Configuration für Database-Controller.
