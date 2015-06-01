@@ -42,3 +42,4 @@
 2015-06-01 12:31:52 - Unable to connect: (1045) Access denied for user 'root'@'localhost' (using password: NO); 
 2015-06-01 12:31:59 - Unable to connect: (1045) Access denied for user 'root'@'localhost' (using password: NO); 
 2015-06-01 12:35:10 - Unable to connect: (1045) Access denied for user 'root'@'localhost' (using password: NO); 
+2015-06-01 13:14:46 - Unable to connect: (1045) Access denied for user 'root'@'localhost' (using password: NO); 

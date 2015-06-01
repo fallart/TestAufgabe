@@ -25,7 +25,7 @@ class Controllers_DataBase
 
     private function __construct()
     {
-        $filePath = DOC_ROOT . DS . 'config' . DS . 'database.php';
+        $filePath = 'config/database.php';
 		include_once($filePath);
         if (isset($data)) {
             $this->_db = new mysqli($data['hostname'], $data['username'], $data['password'], $data['db_name']);
