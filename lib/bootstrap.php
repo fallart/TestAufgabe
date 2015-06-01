@@ -8,7 +8,7 @@
 
 function autoLoad_function($className) {
     $filePath = str_replace('_', DS, $className );
-    $fileName = 'lib/' $filePath . ".php";
+    $fileName = 'lib/' . $filePath . ".php";
     return include_once($fileName);
 }
 
