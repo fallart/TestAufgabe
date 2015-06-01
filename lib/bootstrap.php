@@ -6,8 +6,6 @@
  * Time: 0:30
  */
 
-include_once('config/config.php');
-
 function autoLoad_function($className) {
     $filePath = str_replace('_', DS, $className );
     $fileName = 'lib/' $filePath . ".php";
