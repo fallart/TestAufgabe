@@ -23,19 +23,25 @@ class Controllers_Main {
         foreach($filters as $key => $val){
             if(!preg_match('/^[\w0-9\%]+$/i',$val)){
                 $valid = false;
-                Controllers_Log::message('Invalid value:' . $val);
-                break;
+				$message = 'Invalid value:' . $val;
+				Controllers_Log::message($message);
+				echo json_decode(array(
+					'result' => 'fail',
+					'reason' => $message,
+				));
+				exit();
+				break;
             }
         }
         if($valid){
-            echo json_encode(Controllers_DataBase::getInstance()->getRecords($filters));
+            echo json_encode(array('result' => 'ok', 'data' => Controllers_DataBase::getInstance()->getRecords($filters)));
         }
     }
 
     public function changeAktiv($id){
         $id = intval($id);
         if($id || $id === 0){
-            echo Controllers_DataBase::getInstance()->changeAktiv($id);
+            Controllers_DataBase::getInstance()->changeAktiv($id);
         }
     }
 

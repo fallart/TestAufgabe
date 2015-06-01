@@ -26,16 +26,27 @@ class Controllers_DataBase
     private function __construct()
     {
         $filePath = DOC_ROOT . DS . 'config' . DS . 'database.php';
-        include_once($filePath);
+		include_once($filePath);
         if (isset($data)) {
             $this->_db = new mysqli($data['hostname'], $data['username'], $data['password'], $data['db_name']);
             if ($this->_db->connect_errno) {
-                Controllers_Log::message("Unable to connect: (" . $this->_db->connect_errno . ") " . $this->_db->connect_error);
-                exit();
+				$message = "Unable to connect: (" . $this->_db->connect_errno . ") " . $this->_db->connect_error;
+                Controllers_Log::message($message);
+                echo json_encode(array(
+					'result' => 'fail',
+					'reason' => $message,
+				));
+				exit();
             }
         } else {
-            Controllers_Log::message('Config load error: ' . $filePath);
-        }
+			$message = 'Config load error: ' . $filePath;
+			Controllers_Log::message($message);
+			echo json_encode(array(
+				'result' => 'fail',
+				'reason' => $message,
+			));
+			exit();
+		}
     }
 
     public function getRecords($filters = array()){
@@ -55,9 +66,9 @@ class Controllers_DataBase
                 $i++;
             }
         }
-        Controllers_Log::message($query);
         $res = $this->_db->query($query . ' ORDER BY id ASC');
-        return $res->fetch_all(MYSQLI_ASSOC);
+		
+		return $res->fetch_all(MYSQLI_ASSOC);
     }
 
     public function changeAktiv($id){
@@ -69,7 +80,13 @@ class Controllers_DataBase
             $stmt->close();
         }
         catch(Exception $ex){
-            Controllers_Log::message('affected_rows: '.$ex->getMessage());
-        }
+			$message = 'affected_rows: '.$ex->getMessage();
+			Controllers_Log::message($message);
+			echo json_encode(array(
+				'result' => 'fail',
+				'reason' => $message,
+			));
+			exit();
+		}
     }
 }

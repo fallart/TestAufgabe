@@ -51,6 +51,7 @@
             </tr>
         </table>
         <span ng-if="records.length == 0"><strong>No results found...</strong></span>
+		<span ng-if="message"><strong>{{message}}</strong></span>
         <script src="static/js/lib/angular.min.js"></script>
         <script type="text/javascript">
             angular.module('adressBuchApp', []);

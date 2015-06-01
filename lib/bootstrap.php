@@ -6,9 +6,11 @@
  * Time: 0:30
  */
 
+include_once('./config/config.php');
+
 function autoLoad_function($className) {
-    $filePath = str_replace('_', '\/', $className );
-    $fileName = $_SERVER['DOCUMENT_ROOT'] . "/" . 'lib' . "/" . $filePath . ".php";
+    $filePath = str_replace('_', DS, $className );
+    $fileName = DOC_ROOT . DS . 'lib' . DS . $filePath . ".php";
     return include_once($fileName);
 }
 

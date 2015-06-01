@@ -33,8 +33,7 @@ if(isset($_GET['action']) && $_GET['action']){
             Controllers_Main::getInstance()->getRecords($filters);
             break;
         case 'change_aktiv':
-            if(
-                isset($_GET['id'])){
+            if(isset($_GET['id'])){
                 Controllers_Main::getInstance()->changeAktiv($_GET['id']);
             }
             break;

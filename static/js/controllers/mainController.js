@@ -6,17 +6,26 @@ function mainController ($scope, $http) {
         'Wohnort',
         'Aktion'
     ];
+	
+	$scope.message = '';
 
     $scope.init = function(){
         $http({method:'GET', url:'database.php', params: {'action': 'get_records'}}).
             success(function(data) {
-                $scope.records = data;
+				if(data['result'] == 'ok'){
+					console.log(data);
+					$scope.records = angular.fromJson(data['data']);
+					console.log($scope.records);
+				}
+				else if(data['result'] == 'fail'){
+					$scope.message = data['reason'];
+				}
             });
     };
 
     $scope.changeAktiv = function(id){
         $http({method:'GET', url:'database.php', params: {'action': 'change_aktiv', 'id':id}}).
-            success(function(data) {
+            success(function() {
                 $scope.init();
             });
     };
@@ -24,7 +33,12 @@ function mainController ($scope, $http) {
     $scope.filter = function(vorname, nachname, postleitzahl, wohnort){
         $http({method:'GET', url:'database.php', params: {'action': 'get_records', 'vorname':vorname, 'nachname':nachname, 'postleitzahl':postleitzahl, 'wohnort':wohnort}}).
             success(function(data) {
-                $scope.records = data;
+				if (data['result'] == 'ok') {
+					$scope.records = angular.fromJson(data['data']);
+				}
+				else if (data['result'] == 'fail') {
+					$scope.message = data['reason'];
+				}
             });
     };
 
