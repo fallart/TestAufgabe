@@ -6,7 +6,7 @@
  * Time: 0:53
  */
 
-include_once('lib/bootstrap.php');
+require_once('lib/bootstrap.php');
 
 if(isset($_GET['action']) && $_GET['action']){
     $action = $_GET['action'];

@@ -3,46 +3,39 @@
     <head>
         <title>Adressbuch</title>
         <meta charset="utf-8">
+        <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <link rel="stylesheet" href="static/css/bootstrap.min.css">
         <script src="static/js/lib/jquery-1.11.3.min.js"></script>
         <script src="static/js/lib/bootstrap.min.js"></script>
     </head>
-    <body ng-controller="mainController" ng-init="init()">
-        <form role="form" name="form">
-            <div class="form-group col-lg-3">
-                <label for="sucheNachVorname">Suche nach Vorname</label>
-                <input type="text" class="form-control" id="sucheNachVorname" placeholder="Enter Vorname" ng-model="vorname">
-            </div>
-            <div class="form-group col-lg-3">
-                <label for="sucheNachNachname">Suche nach Nachname</label>
-                <input type="text" class="form-control" id="sucheNachNachname" placeholder="Enter Nachname" ng-model="nachname">
-            </div>
-            <div class="form-group col-lg-3">
-                <label for="sucheNachNachname">Suche nach Postleitzahl</label>
-                <input type="text" class="form-control" id="sucheNachPostleitzahl" placeholder="Enter Postleitzahl" ng-model="postleitzahl">
-            </div>
-            <div class="form-group col-lg-3">
-                <label for="sucheNachNachname">Suche nach Wohnort</label>
-                <input type="text" class="form-control" id="sucheNachWohnort" placeholder="Enter Wohnort" ng-model="wohnort">
-            </div>
-            <div class="col-lg-3">
-                <button class="btn btn-default" ng-click="filter(vorname, nachname, postleitzahl, wohnort)">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true" >Filter</span>
-                </button>
-                <button type="reset" class="btn btn-default" ng-click="reset(form)">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true" >Reset</span>
-                </button>
-            </div>
-        </form>
+    <body class="container-fluid" ng-controller="mainController" ng-init="init()">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h1>Adressbuch</h1></div>
         <table class="table">
             <tr>
                 <th ng-repeat="title in titles">{{title}}</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="text" class="form-control" id="sucheNachVorname" placeholder="Enter Vorname" ng-model="vorname" ng-change="filter(vorname, nachname, postleitzahl, wohnort)"></td>
+                <td><input type="text" class="form-control" id="sucheNachNachname" placeholder="Enter Nachname" ng-model="nachname" ng-change="filter(vorname, nachname, postleitzahl, wohnort)"></td>
+                <td></td>
+                <td><input type="text" class="form-control" id="sucheNachPostleitzahl" placeholder="Enter Postleitzahl" ng-model="postleitzahl" ng-change="filter(vorname, nachname, postleitzahl, wohnort)"></td>
+                <td><input type="text" class="form-control" id="sucheNachWohnort" placeholder="Enter Wohnort" ng-model="wohnort" ng-change="filter(vorname, nachname, postleitzahl, wohnort)"></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr ng-repeat="record in records track by $index" ng-class="record.enabled == 1 ? 'success' : 'warning'">
+                <td>{{record.id}}</td>
                 <td>{{record.firstname}}</td>
                 <td>{{record.lastname}}</td>
+                <td>{{record.adress}}</td>
                 <td>{{record.zip_code}}</td>
                 <td>{{record.city}}</td>
+                <td>{{record.phone_number}}</td>
+                <td>{{record.birthdate}}</td>
                 <td>
                     <button class="btn btn-default" ng-click="changeAktiv(record.id)">
                         <span class="glyphicon" aria-hidden="true" ng-class="record.enabled != 1 ? 'glyphicon-ok' : 'glyphicon-remove'"></span>
@@ -51,11 +44,14 @@
             </tr>
         </table>
         <span ng-if="records.length == 0"><strong>No results found...</strong></span>
-		<span ng-if="message"><strong>{{message}}</strong></span>
+        <span ng-if="message"><strong>{{message}}</strong></span>
         <script src="static/js/lib/angular.min.js"></script>
         <script type="text/javascript">
             angular.module('adressBuchApp', []);
         </script>
         <script src="static/js/controllers/mainController.js"></script>
+
+    </div>
+
     </body>
 </html>

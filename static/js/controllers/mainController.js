@@ -1,26 +1,19 @@
 function mainController ($scope, $http) {
     $scope.titles = [
+        'Id',
         'Vorname',
         'Nachname',
+        'Strasse',
         'Postleitzahl',
         'Wohnort',
-        'Aktion'
+        'Telefonnummer',
+        'Geburtsdatum',
     ];
 	
 	$scope.message = '';
 
     $scope.init = function(){
-        $http({method:'GET', url:'database.php', params: {'action': 'get_records'}}).
-            success(function(data) {
-				if(data['result'] == 'ok'){
-					console.log(data);
-					$scope.records = angular.fromJson(data['data']);
-					console.log($scope.records);
-				}
-				else if(data['result'] == 'fail'){
-					$scope.message = data['reason'];
-				}
-            });
+        $scope.filter($scope.vorname, $scope.nachname, $scope.postleitzahl, $scope.wohnort);
     };
 
     $scope.changeAktiv = function(id){

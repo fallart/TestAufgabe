@@ -66,9 +66,12 @@ class Controllers_DataBase
                 $i++;
             }
         }
+        $result = array();
         $res = $this->_db->query($query . ' ORDER BY id ASC');
-		
-		return $res->fetch_all(MYSQLI_ASSOC);
+		while($row = $res->fetch_array(MYSQLI_ASSOC)){
+            $result[]= $row;
+        }
+		return $result;
     }
 
     public function changeAktiv($id){
