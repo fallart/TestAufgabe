@@ -8,6 +8,7 @@ function mainController ($scope, $http) {
         'Wohnort',
         'Telefonnummer',
         'Geburtsdatum',
+        'Aktion'
     ];
 	
 	$scope.message = '';
